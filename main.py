@@ -22,8 +22,8 @@ def read_qr_code(file_name):
 
     if len(value) == 0: 
         return FAILED_READ_TEXT
-    
-    return value[0]
+        
+    return value[0].data
 
 if args.check_single != None:
     qr = read_qr_code(args.check_single)
