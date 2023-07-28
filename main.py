@@ -4,6 +4,7 @@ import cv2
 import pandas
 import pathlib
 import argparse
+from pyzbar.pyzbar import decode
 
 FAILED_READ_TEXT = "BLANK/FAILED"
 
@@ -17,13 +18,12 @@ args = parser.parse_args()
 
 def read_qr_code(file_name):
     img = cv2.imread(file_name)
-    detect = cv2.QRCodeDetector()
-    value, points, straight_qrcode = detect.detectAndDecode(img)
+    value = decode(img)
 
-    if value == "": 
+    if len(value) == 0: 
         return FAILED_READ_TEXT
-
-    return value
+    
+    return value[0]
 
 if args.check_single != None:
     qr = read_qr_code(args.check_single)
@@ -52,4 +52,4 @@ elif args.check_all != None:
         print(frame)
 
     print('------------------------------')
-    print(f"{success_count / total_count * 100}% Success Rate out of {total_count} images.")
+    print(f"{success_count / total_count:.2%}% Success Rate out of {total_count} images.")
