@@ -22,7 +22,7 @@ def read_qr_code(file_name):
 
     if len(value) == 0: 
         return FAILED_READ_TEXT
-        
+
     return value[0].data
 
 if args.check_single != None:
@@ -52,4 +52,4 @@ elif args.check_all != None:
         print(frame)
 
     print('------------------------------')
-    print(f"{success_count / total_count:.2%}% Success Rate out of {total_count} images.")
+    print(f"{success_count / total_count:.2%} Success Rate out of {total_count} images.")
